@@ -10,16 +10,12 @@ import Combine
 
 class MuscleListViewController: UIViewController {
 	
+	//MARK: - variables
 	private var collectionView: UICollectionView?
 	
 	private var muscles: [MuscleGroup] = []
-	//{
-	//	var muscle = MuscleGroup(MuscleGroupID: 1, Name: "Name", ImagePath: nil)
-	//	var muscle2 = MuscleGroup(MuscleGroupID: 2, Name: "nam", ImagePath: nil)
-	//	return [muscle, muscle2]
-	//}()
-	
-	
+
+	//MARK: - initiating UI
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = UIColor(named: "Background")
@@ -29,25 +25,27 @@ class MuscleListViewController: UIViewController {
 		
 	}
 	
+	//MARK: - functions
+	
+	//fetching muscle list from API
 	func startFetch(){
 		getMuscleGroups(complete: {(cum) in
 			self.muscles = cum
 				let layout = UICollectionViewFlowLayout()
 				layout.scrollDirection = .vertical
 				layout.minimumLineSpacing = 15.0
-				layout.itemSize = CGSize(width: self.view.bounds.width-12, height: self.view.bounds.width/5)
+				layout.itemSize = CGSize(width: self.view.bounds.width-26, height: self.view.bounds.width/5)
 				self.collectionView?.setCollectionViewLayout(layout, animated: true)
 				self.collectionView?.reloadData()
-			
-			
 		})
 	}
 	
+	//creating collection view and its cringe ass properties
 	func createCollectionView(){
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .vertical
 		layout.minimumLineSpacing = 15.0
-		layout.itemSize = CGSize(width: view.bounds.width-12, height: view.bounds.width/5)
+		layout.itemSize = CGSize(width: view.bounds.width-20, height: view.bounds.width/5)
 		
 		
 		collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -58,6 +56,8 @@ class MuscleListViewController: UIViewController {
 		collectionView.register(MuscleCollectionViewCell.self, forCellWithReuseIdentifier: MuscleCollectionViewCell.identifier)
 		collectionView.delegate = self
 		collectionView.dataSource = self
+		collectionView.delaysContentTouches = false
+		collectionView.backgroundColor = UIColor(named: "Background")
 		
 		view.addSubview(collectionView)
 		collectionView.frame = view.bounds
@@ -65,6 +65,8 @@ class MuscleListViewController: UIViewController {
 	}
 }
 
+
+//MARK: - Delegate & DataSource
 extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDataSource{
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return muscles.count

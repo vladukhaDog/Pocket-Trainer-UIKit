@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6118363A2704192500BA16F8 /* MuscleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611836392704192500BA16F8 /* MuscleCollectionViewCell.swift */; };
+		6118364127053C3900BA16F8 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118364027053C3900BA16F8 /* ExerciseCollectionViewCell.swift */; };
+		6118364327055CB100BA16F8 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */; };
 		61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FAE2704057900D1456B /* AppDelegate.swift */; };
 		61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB02704057900D1456B /* SceneDelegate.swift */; };
 		61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB22704057900D1456B /* MuscleListViewController.swift */; };
@@ -28,6 +30,8 @@
 /* Begin PBXFileReference section */
 		5D56098CA48BA12906D63A3B /* Pods_Pocket_Trainer_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pocket_Trainer_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611836392704192500BA16F8 /* MuscleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleCollectionViewCell.swift; sourceTree = "<group>"; };
+		6118364027053C3900BA16F8 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		61B85FAB2704057900D1456B /* Pocket Trainer UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Trainer UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B85FAE2704057900D1456B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61B85FB02704057900D1456B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				61B85FD227040C5200D1456B /* ExerciseListViewController.swift */,
+				6118364027053C3900BA16F8 /* ExerciseCollectionViewCell.swift */,
+				6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */,
 			);
 			path = ExerciseView;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61B85FB92704057900D1456B /* Pocket_Trainer_UIKit.xcdatamodeld in Sources */,
+				6118364127053C3900BA16F8 /* ExerciseCollectionViewCell.swift in Sources */,
 				61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */,
 				61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */,
 				61B85FC6270405BC00D1456B /* Requester.swift in Sources */,
@@ -269,6 +276,7 @@
 				61B85FD12704080400D1456B /* MuscleGroup.swift in Sources */,
 				6118363A2704192500BA16F8 /* MuscleCollectionViewCell.swift in Sources */,
 				61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */,
+				6118364327055CB100BA16F8 /* ExerciseDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
