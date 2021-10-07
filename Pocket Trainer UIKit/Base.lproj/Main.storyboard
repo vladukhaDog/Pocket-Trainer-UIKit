@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="koV-rV-QP0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="99Y-MG-Pfw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,12 +23,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1031.8840579710145" y="123.88392857142857"/>
+            <point key="canvasLocation" x="1068" y="-607"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="Ogc-CY-Spd">
+            <objects>
+                <tabBarController id="99Y-MG-Pfw" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IXx-z6-f8i">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="koV-rV-QP0" kind="relationship" relationship="viewControllers" id="Ox5-XK-nca"/>
+                        <segue destination="GRP-pM-T7M" kind="relationship" relationship="viewControllers" id="kae-1f-8A8"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fd-KW-wQa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1261" y="-282"/>
+        </scene>
+        <!--Упражнения-->
         <scene sceneID="4ud-no-bts">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="koV-rV-QP0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Упражнения" image="list.dash" catalog="system" id="OqW-Ri-Zvl">
+                        <imageReference key="selectedImage" image="list.dash" catalog="system" symbolScale="default"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1E8-Aj-iYJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -40,10 +62,49 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reJ-5R-skn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.73913043478262" y="123.88392857142857"/>
+            <point key="canvasLocation" x="25" y="-607"/>
+        </scene>
+        <!--Программы-->
+        <scene sceneID="k2n-9F-qJn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GRP-pM-T7M" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Программы" image="chart.bar.doc.horizontal" catalog="system" id="erC-SS-Tz4">
+                        <imageReference key="selectedImage" image="chart.bar.doc.horizontal" catalog="system" symbolScale="default"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BA1-tA-t3f">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lmY-TB-2Xc" kind="relationship" relationship="rootViewController" id="OmF-Bl-vv8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fwG-PX-9QZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="25" y="110"/>
+        </scene>
+        <!--Программы-->
+        <scene sceneID="GKL-jd-iT8">
+            <objects>
+                <viewController id="lmY-TB-2Xc" customClass="WorkoutsListViewController" customModule="Pocket_Trainer_UIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="92x-Lz-kAW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ofL-Uh-Uic"/>
+                        <color key="backgroundColor" name="Background"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Программы" id="x7z-ki-Y4I"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n37-qq-gfl" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1067" y="110"/>
         </scene>
     </scenes>
     <resources>
+        <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
         <namedColor name="Background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
