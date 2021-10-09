@@ -11,6 +11,7 @@
 		6118363A2704192500BA16F8 /* MuscleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611836392704192500BA16F8 /* MuscleCollectionViewCell.swift */; };
 		6118364127053C3900BA16F8 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118364027053C3900BA16F8 /* ExerciseCollectionViewCell.swift */; };
 		6118364327055CB100BA16F8 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */; };
+		613F24A427124D9F003B562E /* TabBarHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F24A327124D9F003B562E /* TabBarHomeViewController.swift */; };
 		61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FAE2704057900D1456B /* AppDelegate.swift */; };
 		61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB02704057900D1456B /* SceneDelegate.swift */; };
 		61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB22704057900D1456B /* MuscleListViewController.swift */; };
@@ -36,6 +37,7 @@
 		611836392704192500BA16F8 /* MuscleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleCollectionViewCell.swift; sourceTree = "<group>"; };
 		6118364027053C3900BA16F8 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
+		613F24A327124D9F003B562E /* TabBarHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarHomeViewController.swift; sourceTree = "<group>"; };
 		61B85FAB2704057900D1456B /* Pocket Trainer UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Trainer UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B85FAE2704057900D1456B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61B85FB02704057900D1456B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,29 @@
 			path = "Exercises View";
 			sourceTree = "<group>";
 		};
+		613F24A527124DAD003B562E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				613F24A327124D9F003B562E /* TabBarHomeViewController.swift */,
+				61183638270418EB00BA16F8 /* Muscles View */,
+				6118363F2705372100BA16F8 /* Exercises View */,
+				61C2CF6D270D2E8000C90897 /* Workouts View */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		613F24A627124DBE003B562E /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				61B85FC92704080400D1456B /* Exercise.swift */,
+				61B85FCC2704080400D1456B /* MuscleGroup.swift */,
+				61B85FC82704080400D1456B /* SaveExercise.swift */,
+				61B85FCB2704080400D1456B /* Workout.swift */,
+				61B85FCA2704080400D1456B /* WorkoutDay.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
 		61B85FA22704057900D1456B = {
 			isa = PBXGroup;
 			children = (
@@ -112,12 +137,9 @@
 			children = (
 				61B85FAE2704057900D1456B /* AppDelegate.swift */,
 				61B85FB02704057900D1456B /* SceneDelegate.swift */,
-				61183638270418EB00BA16F8 /* Muscles View */,
-				6118363F2705372100BA16F8 /* Exercises View */,
-				61C2CF6D270D2E8000C90897 /* Workouts View */,
+				613F24A527124DAD003B562E /* Controllers */,
+				61B85FC7270407E600D1456B /* Model */,
 				61B85FB42704057900D1456B /* Main.storyboard */,
-				61B85FC7270407E600D1456B /* Structs */,
-				61B85FC5270405BC00D1456B /* Requester.swift */,
 				61B85FBA2704057F00D1456B /* Assets.xcassets */,
 				61B85FBC2704057F00D1456B /* LaunchScreen.storyboard */,
 				61B85FBF2704057F00D1456B /* Info.plist */,
@@ -126,16 +148,13 @@
 			path = "Pocket Trainer UIKit";
 			sourceTree = "<group>";
 		};
-		61B85FC7270407E600D1456B /* Structs */ = {
+		61B85FC7270407E600D1456B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				61B85FC92704080400D1456B /* Exercise.swift */,
-				61B85FCC2704080400D1456B /* MuscleGroup.swift */,
-				61B85FC82704080400D1456B /* SaveExercise.swift */,
-				61B85FCB2704080400D1456B /* Workout.swift */,
-				61B85FCA2704080400D1456B /* WorkoutDay.swift */,
+				613F24A627124DBE003B562E /* Structs */,
+				61B85FC5270405BC00D1456B /* Requester.swift */,
 			);
-			path = Structs;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		61C2CF6D270D2E8000C90897 /* Workouts View */ = {
@@ -297,6 +316,7 @@
 				6118363A2704192500BA16F8 /* MuscleCollectionViewCell.swift in Sources */,
 				61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */,
 				6118364327055CB100BA16F8 /* ExerciseDetailViewController.swift in Sources */,
+				613F24A427124D9F003B562E /* TabBarHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

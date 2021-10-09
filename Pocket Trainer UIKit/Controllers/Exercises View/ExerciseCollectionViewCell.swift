@@ -46,6 +46,7 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 		label.text = "Exercise"
 		label.lineBreakMode = .byWordWrapping
 		label.numberOfLines = 0
+		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
@@ -54,7 +55,7 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 		image.sizeToFit()
 		image.layer.cornerRadius = 8.0
 		image.clipsToBounds = true
-		
+		image.translatesAutoresizingMaskIntoConstraints = false
 		return image
 	}()
 	
@@ -63,13 +64,18 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
+		setupViews()
+		setConstraints()
+		
+	}
+	
+	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
 		contentView.layer.borderColor = UIColor.gray.cgColor
 		contentView.layer.borderWidth = 4.0
 		
 		addSubview(exerciseName)
 		addSubview(exerciseImageView)
-		
 	}
 	
 	override var isHighlighted: Bool {
@@ -82,22 +88,40 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 			}
 		}
 	
-	
-	//MARK: - layout of UI elements
-	override func layoutSubviews() {
-		super.layoutSubviews()
+	private func setConstraints(){
+		NSLayoutConstraint.activate([
+			exerciseImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -5),
+			exerciseImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+			exerciseImageView.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -10),
+			exerciseImageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -10)
+		])
 		
-		exerciseName.frame = CGRect(x: (contentView.bounds.width/4) + 8,
-								  y: contentView.bounds.height/6,
-									width: (contentView.bounds.width/4)*2.5,
-								  height: (contentView.bounds.height/3) * 2)
-		exerciseImageView.frame = CGRect(x: 20,
-									  y: contentView.bounds.height/7,
-								   width: contentView.bounds.height - 20,
-								   height: contentView.bounds.height - 20)
-		
+		NSLayoutConstraint.activate([
+			exerciseName.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
+			exerciseName.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+			exerciseName.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+			exerciseName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+			
+		])
 		
 	}
+	
+	
+	//MARK: - layout of UI elements
+	//override func layoutSubviews() {
+	//	super.layoutSubviews()
+	//
+	//	exerciseName.frame = CGRect(x: (contentView.bounds.width/4) + 8,
+	//							  y: contentView.bounds.height/6,
+	//								width: (contentView.bounds.width/4)*2.5,
+	//							  height: (contentView.bounds.height/3) * 2)
+	//	exerciseImageView.frame = CGRect(x: 20,
+	//								  y: contentView.bounds.height/7,
+	//							   width: contentView.bounds.height - 20,
+	//							   height: contentView.bounds.height - 20)
+	//
+	//
+	//}
 	
 	//MARK: - I hate UIKit
 	required init?(coder: NSCoder) {
