@@ -41,17 +41,6 @@ class ExerciseListViewController: UIViewController {
 	
 	//MARK: - functions
 	
-	private func setConstraints(){
-		
-		NSLayoutConstraint.activate([
-					collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-					collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-					collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-					collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-				])
-		
-	}
-	
 	
 	//fetching Exercises from API
 	private func startFetch(){
@@ -61,18 +50,12 @@ class ExerciseListViewController: UIViewController {
 					muscle.MuscleGroupID == self.muscleGroup.MuscleGroupID
 				}
 			})
-				//let layout = UICollectionViewFlowLayout()
-				//layout.scrollDirection = .vertical
-				//layout.minimumLineSpacing = 15.0
-				//layout.itemSize = CGSize(width: self.view.bounds.width-26, height: self.view.bounds.width/5)
-				//self.collectionView?.setCollectionViewLayout(layout, animated: true)
 				self.collectionView.reloadData()
 			
 			
 		})
 	}
 	
-
 	private func setupViews(){
 		title = "Упражнения: \(muscleGroup.Name!)"
 		navigationController?.navigationBar.prefersLargeTitles = true
@@ -92,6 +75,20 @@ class ExerciseListViewController: UIViewController {
 	
 
 
+}
+
+//MARK: - Constraints
+extension ExerciseListViewController{
+	private func setConstraints(){
+		
+		NSLayoutConstraint.activate([
+					collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+					collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+					collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+					collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+				])
+		
+	}
 }
 
 //MARK: - Delegate & DataSource
@@ -117,7 +114,6 @@ extension ExerciseListViewController: UICollectionViewDelegate, UICollectionView
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		print(collectionView.frame.width)
 		return CGSize(
 			
 					width: collectionView.frame.width-20,

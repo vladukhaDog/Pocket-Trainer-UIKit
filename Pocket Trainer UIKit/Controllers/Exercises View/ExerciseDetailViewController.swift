@@ -135,6 +135,29 @@ class ExerciseDetailViewController: UIViewController {
 		
 	}
 	
+	
+	
+	//since UINavigationBarTitle cant be multiline, this shit has to be UIView
+	func makeBarTitle(){
+		let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 44.0))
+		label.backgroundColor = UIColor.clear
+		label.numberOfLines = 0
+		label.textAlignment = NSTextAlignment.center
+		label.text = exercise.Name
+		label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
+		self.navigationItem.largeTitleDisplayMode = .always
+		self.navigationItem.titleView = label
+	}
+	
+	
+	
+	
+	
+}
+
+
+//MARK: - Constraints
+extension ExerciseDetailViewController{
 	private func setupConstraints() {
 		//scrollView constraints
 		NSLayoutConstraint.activate([
@@ -177,23 +200,6 @@ class ExerciseDetailViewController: UIViewController {
 		
 		
 	}
-	
-	//since UINavigationBarTitle cant be multiline, this shit has to be UIView
-	func makeBarTitle(){
-		let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 44.0))
-		label.backgroundColor = UIColor.clear
-		label.numberOfLines = 0
-		label.textAlignment = NSTextAlignment.center
-		label.text = exercise.Name
-		label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
-		self.navigationItem.largeTitleDisplayMode = .always
-		self.navigationItem.titleView = label
-	}
-	
-	
-	
-	
-	
 }
 
 

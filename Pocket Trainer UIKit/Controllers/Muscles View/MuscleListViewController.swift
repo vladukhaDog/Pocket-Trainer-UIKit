@@ -10,17 +10,28 @@ import Combine
 
 class MuscleListViewController: UIViewController {
 	
-	//MARK: - variables
-	private var collectionView: UICollectionView?
+	//MARK: - data n'shit
+	private let collectionView: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		layout.minimumLineSpacing = 15.0
+		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = UIColor(named: "Background")
+		collectionView.bounces = true
+		collectionView.register(MuscleCollectionViewCell.self, forCellWithReuseIdentifier: MuscleCollectionViewCell.identifier)
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		return collectionView
+	}()
 	
 	private var muscles: [MuscleGroup] = []
 
 	//MARK: - initiating UI
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = UIColor(named: "Background")
-		navigationController?.navigationBar.prefersLargeTitles = true
-		createCollectionView()
+		
+		setupViews()
+		setConstraints()
+		setDelegates()
+		
 		startFetch()
 		
 	}
@@ -31,43 +42,43 @@ class MuscleListViewController: UIViewController {
 	func startFetch(){
 		getMuscleGroups(complete: {(cum) in
 			self.muscles = cum
-				let layout = UICollectionViewFlowLayout()
-				layout.scrollDirection = .vertical
-				layout.minimumLineSpacing = 15.0
-				layout.itemSize = CGSize(width: self.view.bounds.width-26, height: self.view.bounds.width/5)
-				self.collectionView?.setCollectionViewLayout(layout, animated: true)
-				self.collectionView?.reloadData()
+				self.collectionView.reloadData()
 		})
 	}
+	private func setupViews(){
+		title = "Мышцы"
+		navigationController?.navigationBar.prefersLargeTitles = true
+		
+		view.addSubview(collectionView)
+	}
 	
-	//creating collection view and its cringe ass properties
-	func createCollectionView(){
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.minimumLineSpacing = 15.0
-		layout.itemSize = CGSize(width: view.bounds.width-20, height: view.bounds.width/5)
+	private func setDelegates(){
 		
-		
-		collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		
-		guard let collectionView = collectionView else{
-			return
-		}
-		collectionView.register(MuscleCollectionViewCell.self, forCellWithReuseIdentifier: MuscleCollectionViewCell.identifier)
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		collectionView.delaysContentTouches = false
-		collectionView.backgroundColor = UIColor(named: "Background")
 		
-		view.addSubview(collectionView)
-		collectionView.frame = view.bounds
+	}
+}
+
+
+//MARK: - Constraints
+extension MuscleListViewController{
+	private func setConstraints(){
+		
+		NSLayoutConstraint.activate([
+					collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+					collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+					collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+					collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+				])
 		
 	}
 }
 
 
 //MARK: - Delegate & DataSource
-extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return muscles.count
 	}
@@ -84,6 +95,16 @@ extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDa
 		let vc = ExerciseListViewController()
 		vc.muscleGroup = muscles[indexPath.row]
 		navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(
+			
+					width: collectionView.frame.width-20,
+					height: self.view.bounds.width/5
+				)
+		
+		
 	}
 	
 	
