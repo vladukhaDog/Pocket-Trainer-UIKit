@@ -9,41 +9,30 @@ import UIKit
 
 class WorkoutsListViewController: UIViewController {
 	
-	//MARK: - variables
-	private var collectionView: UICollectionView?
+	//MARK: - data n'shit
+	private let collectionView: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		layout.minimumLineSpacing = 15.0
+		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = UIColor(named: "Background")
+		collectionView.bounces = true
+		collectionView.register(WorkoutCollectionViewCell.self, forCellWithReuseIdentifier: WorkoutCollectionViewCell.identifier)
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		return collectionView
+	}()
 	
 	private var workouts: [Workout] = []
 	
-	//MARK: - UI Elements
-	private lazy var scrollView: UIScrollView = {
-		let scrollView = UIScrollView()
-		scrollView.translatesAutoresizingMaskIntoConstraints = false
-		return scrollView
-	}()
-	
-	private lazy var contentView: UIView = {
-		let contentView = UIView()
-		contentView.translatesAutoresizingMaskIntoConstraints = false
-		
-		return contentView
-	}()
-	
-	private lazy var stackView: UIStackView = {
-		let stackView = UIStackView()
-		stackView.axis = .vertical
-		stackView.alignment = .center
-		stackView.spacing = 16
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		
-		return stackView
-	}()
+
 	
 	//MARK: - initiating UI
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = UIColor(named: "Background")
-		navigationController?.navigationBar.prefersLargeTitles = true
-		createCollectionView()
+		
+		setupViews()
+		setConstraints()
+		setDelegates()
+		
 		startFetch()
 		
 		
@@ -51,49 +40,48 @@ class WorkoutsListViewController: UIViewController {
 	}
 	
 	//MARK: - functions
-	
+	private func setupViews(){
+		title = "Программы"
+		navigationController?.navigationBar.prefersLargeTitles = true
+		view.addSubview(collectionView)
+	}
 	
 	
 	//fetching muscle list from API
-	func startFetch(){
+	private func startFetch(){
 		getWorkouts(complete: { (cum) in//(complete: {(cum) in
 			self.workouts = cum
-			let layout = UICollectionViewFlowLayout()
-			layout.scrollDirection = .vertical
-			layout.minimumLineSpacing = 15.0
-			layout.itemSize = CGSize(width: self.view.bounds.width-26, height: self.view.bounds.width/2.6)
-			self.collectionView?.setCollectionViewLayout(layout, animated: true)
-			self.collectionView?.reloadData()
+			self.collectionView.reloadData()
 		})
 	}
 	
-	//creating collection view and its cringe ass properties
-	func createCollectionView(){
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.minimumLineSpacing = 15.0
+	private func setDelegates(){
 		
-		
-		collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		
-		guard let collectionView = collectionView else{
-			return
-		}
-		collectionView.register(WorkoutCollectionViewCell.self, forCellWithReuseIdentifier: WorkoutCollectionViewCell.identifier)
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		collectionView.delaysContentTouches = false
-		collectionView.backgroundColor = UIColor(named: "Background")
 		
-		view.addSubview(collectionView)
-		collectionView.frame = view.bounds
+	}
+
+}
+
+//MARK: - Constraints
+extension WorkoutsListViewController{
+	private func setConstraints(){
+		
+		NSLayoutConstraint.activate([
+					collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+					collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+					collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+					collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+				])
 		
 	}
 }
 
 
 //MARK: - Delegate & DataSource
-extension WorkoutsListViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension WorkoutsListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return workouts.count
 	}
@@ -114,6 +102,16 @@ extension WorkoutsListViewController: UICollectionViewDelegate, UICollectionView
 		let vc = WorkoutDaysViewController()
 		vc.workout = workouts[indexPath.row]
 		navigationController?.pushViewController(vc, animated: true)
+		
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(
+			
+					width: collectionView.frame.width-20,
+					height: self.view.bounds.width/3.5
+				)
+		
 		
 	}
 }

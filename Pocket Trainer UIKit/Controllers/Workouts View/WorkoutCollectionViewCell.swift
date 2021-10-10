@@ -18,12 +18,7 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 		}
 	}
 	
-	var showDays: Bool = false{
-		didSet{
-			
-			
-		}
-	}
+	
 	
 	//MARK: - UI components
 	private var workoutName: UILabel = {
@@ -32,25 +27,23 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 		
 		label.lineBreakMode = .byWordWrapping
 		label.numberOfLines = 0
+		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
 	private var workoutImageView: UIImageView = {
 		var image = UIImageView()
 		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
 		return image
 	}()
 	
 	//initiating UI
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		contentView.layer.cornerRadius = 20.0
-		contentView.layer.borderColor = UIColor.gray.cgColor
-		contentView.layer.borderWidth = 4.0
 		
-		addSubview(workoutName)
-		addSubview(workoutImageView)
-		
+		setupViews()
+		setConstraints()
 	}
 	
 	override var isHighlighted: Bool {
@@ -63,23 +56,19 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 			}
 		}
 	
-	//MARK: - Layout
-	override func layoutSubviews() {
-		super.layoutSubviews()
+	//MARK: - functions
+	
+	private func setupViews(){
+		contentView.layer.cornerRadius = 20.0
+		contentView.layer.borderColor = UIColor.gray.cgColor
+		contentView.layer.borderWidth = 4.0
 		
-		// why in the damn Odin's name this has to be done here
-		
-		workoutImageView.frame = CGRect(x: 20,
-									  y: (contentView.bounds.height/5)/2,
-								   width: (contentView.bounds.height/5)*4,
-								   height: (contentView.bounds.height/5)*4)
-		workoutName.frame = CGRect(x: ((contentView.bounds.height/5)*4) + 30,
-								  y: contentView.bounds.height/6,
-									width: (contentView.bounds.width/4)*2,
-								  height: (contentView.bounds.height/6)*5)
-		
-		
+		addSubview(workoutImageView)
+		addSubview(workoutName)
 	}
+	
+	//MARK: - Layout
+
 	
 	//MARK: - I hate UIKit
 	required init?(coder: NSCoder) {
@@ -87,4 +76,26 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 	}
 	
 
+}
+
+
+//MARK: - constraints
+extension WorkoutCollectionViewCell{
+	private func setConstraints(){
+		NSLayoutConstraint.activate([
+			workoutImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+			workoutImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+			workoutImageView.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -20),
+			workoutImageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -20)
+		])
+	
+		NSLayoutConstraint.activate([
+			workoutName.leadingAnchor.constraint(equalTo: workoutImageView.trailingAnchor, constant: 10),
+			workoutName.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+			workoutName.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+			workoutName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+	
+		])
+	
+	}
 }
