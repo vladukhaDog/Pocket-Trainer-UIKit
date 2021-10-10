@@ -18,10 +18,11 @@ class ExerciseListViewController: UIViewController {
 	
 	private let collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
-		layout.minimumLineSpacing = 5
+		layout.minimumLineSpacing = 15.0
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = UIColor(named: "Background")
-		collectionView.register(ExerciseCollectionViewCell.self, forCellWithReuseIdentifier: ExerciseCollectionViewCell.identifier)
+		collectionView.bounces = true
+		collectionView.register(ExerciseCollectionViewCell.self, forCellWithReuseIdentifier: "ExerciseCell")
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		return collectionView
 	}()
@@ -31,8 +32,9 @@ class ExerciseListViewController: UIViewController {
         super.viewDidLoad()
 		
 		setupViews()
-		setDelegates()
 		setConstraints()
+		setDelegates()
+		
 		startFetch()
 		
 	}
@@ -42,11 +44,11 @@ class ExerciseListViewController: UIViewController {
 	private func setConstraints(){
 		
 		NSLayoutConstraint.activate([
-			collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-		])
+					collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+					collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+					collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+					collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+				])
 		
 	}
 	
@@ -85,9 +87,6 @@ class ExerciseListViewController: UIViewController {
 		collectionView.dataSource = self
 		collectionView.delaysContentTouches = false
 		
-		
-	
-		
 	}
     
 	
@@ -96,7 +95,7 @@ class ExerciseListViewController: UIViewController {
 }
 
 //MARK: - Delegate & DataSource
-extension ExerciseListViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension ExerciseListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -118,7 +117,12 @@ extension ExerciseListViewController: UICollectionViewDelegate, UICollectionView
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		CGSize(width: collectionView.frame.width, height: 100)
+		print(collectionView.frame.width)
+		return CGSize(
+			
+					width: collectionView.frame.width-20,
+					height: self.view.bounds.width/5
+				)
 		
 		
 	}

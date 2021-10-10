@@ -21,8 +21,8 @@ class TabBarHomeViewController: UITabBarController, UITabBarControllerDelegate {
 	//MARK: - setting up ViewControllers in Tabs
 	func setupVCs() {
 		   viewControllers = [
-			   createNavController(for: MuscleListViewController(), title: NSLocalizedString("Упражнения", comment: ""), image: UIImage(systemName: "magnifyingglass")!),
-			   createNavController(for: WorkoutsListViewController(), title: NSLocalizedString("Программы", comment: ""), image: UIImage(systemName: "house")!)
+			   createNavController(for: MuscleListViewController(), title: NSLocalizedString("Упражнения", comment: ""), image: UIImage(systemName: "list.dash")!),
+			   createNavController(for: WorkoutsListViewController(), title: NSLocalizedString("Программы", comment: ""), image: UIImage(systemName: "chart.bar.doc.horizontal")!)
 		   ]
 		
 	}
@@ -45,6 +45,8 @@ class TabBarHomeViewController: UITabBarController, UITabBarControllerDelegate {
 		view.backgroundColor = UIColor(named: "Background")
 		UITabBar.appearance().barTintColor = UIColor(named: "Background")
 		tabBar.tintColor = .label
+		UITabBar.appearance().layer.borderWidth = 3.0
+		UITabBar.appearance().layer.borderColor = UIColor.red.cgColor
 		setupVCs()
 		
 	}
