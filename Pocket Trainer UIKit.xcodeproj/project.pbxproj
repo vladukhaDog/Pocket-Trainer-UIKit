@@ -13,6 +13,9 @@
 		6118364327055CB100BA16F8 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */; };
 		613F24A427124D9F003B562E /* TabBarHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F24A327124D9F003B562E /* TabBarHomeViewController.swift */; };
 		61A5034B2713B44800783240 /* WorkoutExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5034A2713B44800783240 /* WorkoutExerciseCollectionViewCell.swift */; };
+		61A5034D27144A5F00783240 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5034C27144A5F00783240 /* CalendarViewController.swift */; };
+		61A503522714540300783240 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A503512714540300783240 /* DataBase.swift */; };
+		61A503542714542500783240 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A503532714542500783240 /* Storage.swift */; };
 		61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FAE2704057900D1456B /* AppDelegate.swift */; };
 		61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB02704057900D1456B /* SceneDelegate.swift */; };
 		61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB22704057900D1456B /* MuscleListViewController.swift */; };
@@ -39,6 +42,9 @@
 		6118364227055CB000BA16F8 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		613F24A327124D9F003B562E /* TabBarHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarHomeViewController.swift; sourceTree = "<group>"; };
 		61A5034A2713B44800783240 /* WorkoutExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		61A5034C27144A5F00783240 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		61A503512714540300783240 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		61A503532714542500783240 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		61B85FAB2704057900D1456B /* Pocket Trainer UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Trainer UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B85FAE2704057900D1456B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61B85FB02704057900D1456B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				613F24A327124D9F003B562E /* TabBarHomeViewController.swift */,
+				61A5034E27144A6700783240 /* Calendar */,
 				61183638270418EB00BA16F8 /* Muscles View */,
 				6118363F2705372100BA16F8 /* Exercises View */,
 				61C2CF6D270D2E8000C90897 /* Workouts View */,
@@ -112,6 +119,14 @@
 				61B85FCA2704080400D1456B /* WorkoutDay.swift */,
 			);
 			path = Structs;
+			sourceTree = "<group>";
+		};
+		61A5034E27144A6700783240 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				61A5034C27144A5F00783240 /* CalendarViewController.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		61B85FA22704057900D1456B = {
@@ -152,6 +167,8 @@
 			children = (
 				613F24A627124DBE003B562E /* Structs */,
 				61B85FC5270405BC00D1456B /* Requester.swift */,
+				61A503512714540300783240 /* DataBase.swift */,
+				61A503532714542500783240 /* Storage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,9 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A5034D27144A5F00783240 /* CalendarViewController.swift in Sources */,
+				61A503542714542500783240 /* Storage.swift in Sources */,
 				61B85FB92704057900D1456B /* Pocket_Trainer_UIKit.xcdatamodeld in Sources */,
 				6118364127053C3900BA16F8 /* ExerciseCollectionViewCell.swift in Sources */,
 				610AA2FB270F6E4A00C72952 /* WorkoutDaysViewController.swift in Sources */,
+				61A503522714540300783240 /* DataBase.swift in Sources */,
 				61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */,
 				61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */,
 				61C2CF6A270D2C9C00C90897 /* WorkoutsListViewController.swift in Sources */,

@@ -16,16 +16,17 @@ class WorkoutDaysViewController: UIViewController {
 	private var exercises = [Exercise]()
 	
 	//MARK: - UI elements
-
-	private lazy var stackView: UIStackView = {
-		let stackView = UIStackView()
-		stackView.axis = .vertical
-		stackView.alignment = .center
-		stackView.spacing = 16
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		stackView.backgroundColor = UIColor(named: "Background")
-		return stackView
+	
+	private var titleLabel: UILabel = {
+		let label = UILabel()
+		label.text = ""
+		label.font = UIFont.boldSystemFont(ofSize: 20.0)
+		label.lineBreakMode = .byWordWrapping
+		label.numberOfLines = 0
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
 	}()
+
 	
 	private lazy var segmentControl: UISegmentedControl = {
 		let seg = UISegmentedControl()
@@ -61,6 +62,7 @@ class WorkoutDaysViewController: UIViewController {
 	private func setupViews(){
 		view.backgroundColor = UIColor(named: "Background")
 		navigationItem.largeTitleDisplayMode = .never
+		view.addSubview(titleLabel)
 		view.addSubview(segmentControl)
 		view.addSubview(collectionView)
 		segmentControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
@@ -70,6 +72,7 @@ class WorkoutDaysViewController: UIViewController {
 	@objc func segmentedValueChanged(_ sender:UISegmentedControl!)
 	   {
 		   currentWorkoutDay = workoutDays[sender.selectedSegmentIndex]
+		   titleLabel.text = currentWorkoutDay?.Name
 		   collectionView.reloadData()
 	   }
 	
@@ -99,6 +102,7 @@ class WorkoutDaysViewController: UIViewController {
 				self.segmentControl.selectedSegmentIndex = 0
 				self.currentWorkoutDay = self.workoutDays[0]
 				self.collectionView.reloadData()
+				self.titleLabel.text = self.workoutDays[0].Name
 			})
 			
 			
@@ -113,8 +117,14 @@ class WorkoutDaysViewController: UIViewController {
 //MARK: - Constraints
 extension WorkoutDaysViewController{
 	private func setConstraints() {
+		
 		NSLayoutConstraint.activate([
-			segmentControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+
+		])
+		NSLayoutConstraint.activate([
+			segmentControl.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
 			segmentControl.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60),
 			segmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 			segmentControl.heightAnchor.constraint(equalTo: view.widthAnchor, constant: -370)
@@ -139,9 +149,10 @@ extension WorkoutDaysViewController: UICollectionViewDelegate, UICollectionViewD
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkoutExerciseCollectionViewCell.identifier, for: indexPath) as? WorkoutExerciseCollectionViewCell{
 			let index = indexPath.item
-			guard let exercise = self.currentWorkoutDay?.Exercises?[index] else {return UICollectionViewCell()}
-			guard let exerciseToShow = exercises.first(where: {$0.ExerciseId == exercise.ExerciseID}) else {return UICollectionViewCell()}
-			cell.exerciseData = exerciseToShow
+			guard let exerciseData = self.currentWorkoutDay?.Exercises?[index] else {return UICollectionViewCell()}
+			guard let exerciseToShow = exercises.first(where: {$0.ExerciseId == exerciseData.ExerciseID}) else {return UICollectionViewCell()}
+			cell.exercise = exerciseToShow
+			cell.exerciseData = exerciseData
 			return cell
 		}
 		return UICollectionViewCell()
@@ -153,6 +164,7 @@ extension WorkoutDaysViewController: UICollectionViewDelegate, UICollectionViewD
 		guard let exercise = self.currentWorkoutDay?.Exercises?[index] else {return}
 		guard let exerciseToShow = exercises.first(where: {$0.ExerciseId == exercise.ExerciseID}) else {return}
 		vc.exercise = exerciseToShow
+		
 		self.present(vc, animated: true)
 	}
 	

@@ -10,6 +10,89 @@ import UIKit
 class WorkoutExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "WorkoutExerciseCell"
 	
+	var exerciseData: ExerciseData!
+	{
+		didSet{
+			repsLabel.text = String(exerciseData.RepsNumber)
+			setsLabel.text = String(exerciseData.SetNumber)
+		}
+	}
+	
+	
+	var exercise: Exercise!
+	{
+		didSet{
+			//set name of an exercise
+			exerciseNameLabel.text = exercise?.Name
+	
+			//set image of exercise
+			let url = URL(string: exercise?.ImagePath ?? "")!
+			fillImageFromUrl(url: url, imageView: exerciseImageView)
+	
+		}
+	}
+
+	
+	//MARK: - UI components
+	
+	private var exerciseNameLabel: UILabel = {
+		let label = UILabel()
+		label.text = "Exercise"
+		label.lineBreakMode = .byWordWrapping
+		label.numberOfLines = 0
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
+	private var setsLabel: UILabel = {
+		let label = UILabel()
+		label.text = "Sets"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
+	private var repsLabel: UILabel = {
+		let label = UILabel()
+		label.text = "Reps"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
+	private var byLabel: UILabel = {
+		let label = UILabel()
+		label.text = "по"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
+	private var exerciseImageView: UIImageView = {
+		var image = UIImageView()
+		image.sizeToFit()
+		image.layer.cornerRadius = 8.0
+		image.clipsToBounds = true
+		image.translatesAutoresizingMaskIntoConstraints = false
+		return image
+	}()
+	private var stackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.axis = .vertical
+		stackView.alignment = .center
+		stackView.spacing = 5
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
+	}()
+	
+	
+	//MARK: - Init
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+	
+		setupViews()
+		setConstraints()
+	
+	}
+	
+	
 	//MARK: - functions
 	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
 		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
@@ -26,56 +109,19 @@ class WorkoutExerciseCollectionViewCell: UICollectionViewCell {
 			}
 	}
 	
-	var exerciseData: Exercise!
-	{
-		didSet{
-			//set name of an exercise
-			exerciseName.text = exerciseData?.Name
-	
-			//set image of exercise
-			let url = URL(string: exerciseData?.ImagePath ?? "")!
-			fillImageFromUrl(url: url, imageView: exerciseImageView)
-	
-		}
-	}
-
-	
-	//MARK: - UI components
-	private var exerciseName: UILabel = {
-		var label = UILabel()
-		label.text = "Exercise"
-		label.lineBreakMode = .byWordWrapping
-		label.numberOfLines = 0
-		label.translatesAutoresizingMaskIntoConstraints = false
-		return label
-	}()
-	
-	private var exerciseImageView: UIImageView = {
-		var image = UIImageView()
-		image.sizeToFit()
-		image.layer.cornerRadius = 8.0
-		image.clipsToBounds = true
-		image.translatesAutoresizingMaskIntoConstraints = false
-		return image
-	}()
-	
-	
-	//MARK: - Init
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-	
-		setupViews()
-		setConstraints()
-	
-	}
-	
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
 		contentView.layer.borderColor = UIColor.gray.cgColor
 		contentView.layer.borderWidth = 4.0
 	
-		addSubview(exerciseName)
+		addSubview(exerciseNameLabel)
 		addSubview(exerciseImageView)
+		addSubview(stackView)
+		stackView.addArrangedSubview(repsLabel)
+		stackView.addArrangedSubview(byLabel)
+		stackView.addArrangedSubview(setsLabel)
+		
+		
 	}
 	
 	override var isHighlighted: Bool {
@@ -106,12 +152,22 @@ extension WorkoutExerciseCollectionViewCell{
 		])
 	
 		NSLayoutConstraint.activate([
-			exerciseName.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
-			exerciseName.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-			exerciseName.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-			exerciseName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+			//stackView.leadingAnchor.constraint(equalTo: exerciseNameLabel.trailingAnchor, constant: 10),
+			stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+			stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+			stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
 	
 		])
+		
+		NSLayoutConstraint.activate([
+			exerciseNameLabel.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
+			exerciseNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+			exerciseNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+			exerciseNameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+	
+		])
+		
+		
 	
 	}
 }

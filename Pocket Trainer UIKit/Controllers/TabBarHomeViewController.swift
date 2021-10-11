@@ -21,6 +21,7 @@ class TabBarHomeViewController: UITabBarController, UITabBarControllerDelegate {
 	//MARK: - setting up ViewControllers in Tabs
 	func setupVCs() {
 		   viewControllers = [
+				createNavController(for: CalendarViewController(), title: NSLocalizedString("Календарь", comment: ""), image: UIImage(systemName: "calendar")!),
 			   createNavController(for: MuscleListViewController(), title: NSLocalizedString("Упражнения", comment: ""), image: UIImage(systemName: "list.dash")!),
 			   createNavController(for: WorkoutsListViewController(), title: NSLocalizedString("Программы", comment: ""), image: UIImage(systemName: "chart.bar.doc.horizontal")!)
 		   ]

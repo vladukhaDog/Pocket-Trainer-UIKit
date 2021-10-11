@@ -11,21 +11,7 @@ import SDWebImage
 class ExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "ExerciseCell"
 	
-	//MARK: - functions
-	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-	}
 	
-	//downloads data from url and sets it as image
-	//SDWebImage is not used since it animates gifs with no way of stopping them in regular UIImageView
-	func fillImageFromUrl(url: URL, imageView: UIImageView){
-		getData(from: url) { data, response, error in
-				guard let data = data, error == nil else { return }
-			DispatchQueue.main.async() {
-					imageView.image = UIImage(data: data)
-				}
-			}
-	}
 	
 	var exerciseData: Exercise!
 	{
@@ -68,6 +54,22 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 		setupViews()
 		setConstraints()
 	
+	}
+	
+	//MARK: - functions
+	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+	}
+	
+	//downloads data from url and sets it as image
+	//SDWebImage is not used since it animates gifs with no way of stopping them in regular UIImageView
+	func fillImageFromUrl(url: URL, imageView: UIImageView){
+		getData(from: url) { data, response, error in
+				guard let data = data, error == nil else { return }
+			DispatchQueue.main.async() {
+					imageView.image = UIImage(data: data)
+				}
+			}
 	}
 	
 	private func setupViews(){

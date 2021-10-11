@@ -10,7 +10,7 @@ import Combine
 
 class MuscleListViewController: UIViewController {
 	
-	//MARK: - data n'shit
+	//MARK: - UI
 	private let collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.minimumLineSpacing = 15.0
