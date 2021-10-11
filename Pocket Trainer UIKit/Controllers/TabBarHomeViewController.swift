@@ -42,11 +42,11 @@ class TabBarHomeViewController: UITabBarController, UITabBarControllerDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		view.backgroundColor = UIColor(named: "Background")
-		UITabBar.appearance().barTintColor = UIColor(named: "Background")
+		view.backgroundColor = UIColor(named: "BackgroundTabBar")
+		UITabBar.appearance().barTintColor = UIColor(named: "BackgroundTabBar")
+		UITabBar.appearance().backgroundColor = UIColor(named: "BackgroundTabBar")
 		tabBar.tintColor = .label
-		UITabBar.appearance().layer.borderWidth = 3.0
-		UITabBar.appearance().layer.borderColor = UIColor.red.cgColor
+		UITabBar.appearance().isTranslucent = false
 		setupVCs()
 		
 	}
