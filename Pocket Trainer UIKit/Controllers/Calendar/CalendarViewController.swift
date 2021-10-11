@@ -31,8 +31,12 @@ class CalendarViewController: UIViewController {
     
 	
 	@objc func datePickerValueChanged(_ sender: UIDatePicker){
-		exercises = db.getExercisesByDate(sender.date)
+		dateChange()
 	
+	}
+	private func dateChange(){
+		exercises = db.getExercisesByDate(datePicker.date)
+		print("Changed date")
 	}
 	
 	
@@ -47,12 +51,12 @@ extension CalendarViewController{
 	private func setupViews(){
 		view.addSubview(datePicker)
 		datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
+		exercises = db.getExercisesByDate(Date())
 	}
 	
 	private func setConstraints(){
 		NSLayoutConstraint.activate([
 			datePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-			datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
 			datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 		])
 	}
