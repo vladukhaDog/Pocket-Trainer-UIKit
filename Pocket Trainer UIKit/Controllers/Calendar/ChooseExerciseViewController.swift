@@ -8,7 +8,8 @@
 import UIKit
 
 class ChooseExerciseViewController: UIViewController {
-	private var exercises = [Exercise]()
+	var delegate:ExerciseAdderDelegate?
+	var exercises: [Exercise]!
 	private var exercisesFiltered = [Exercise]()
 	
 	//MARK: - UI elements
@@ -39,7 +40,7 @@ class ChooseExerciseViewController: UIViewController {
 		setConstraints()
 		setDelegates()
 		
-		startFetch()
+		//startFetch()
     }
     
 
@@ -53,6 +54,7 @@ extension ChooseExerciseViewController{
 		view.backgroundColor = UIColor(named: "Background")
 		view.addSubview(searchBar)
 		view.addSubview(collectionView)
+		exercisesFiltered = exercises
 	}
 	
 	private func setDelegates(){
@@ -110,7 +112,9 @@ extension ChooseExerciseViewController: UICollectionViewDelegate, UICollectionVi
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print("pressed")
+		//print("pressed")
+		let saved = SavedExercise(Exercise: ExerciseSavedData(ExerciseID: exercisesFiltered[indexPath.row].ExerciseId, RepsNumber: []), date: Date(), Weights: [])
+		delegate?.addExercise(saved)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

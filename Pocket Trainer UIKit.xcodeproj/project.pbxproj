@@ -17,6 +17,8 @@
 		61A503522714540300783240 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A503512714540300783240 /* DataBase.swift */; };
 		61A503542714542500783240 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A503532714542500783240 /* Storage.swift */; };
 		61A50356271463DA00783240 /* ChooseExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A50355271463DA00783240 /* ChooseExerciseViewController.swift */; };
+		61A5035827182CB900783240 /* SavedExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5035727182CB900783240 /* SavedExerciseCollectionViewCell.swift */; };
+		61A5035A271C84C300783240 /* SavedExerciseRepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A50359271C84C300783240 /* SavedExerciseRepsViewController.swift */; };
 		61B85FAF2704057900D1456B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FAE2704057900D1456B /* AppDelegate.swift */; };
 		61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB02704057900D1456B /* SceneDelegate.swift */; };
 		61B85FB32704057900D1456B /* MuscleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B85FB22704057900D1456B /* MuscleListViewController.swift */; };
@@ -47,6 +49,8 @@
 		61A503512714540300783240 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		61A503532714542500783240 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		61A50355271463DA00783240 /* ChooseExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseExerciseViewController.swift; sourceTree = "<group>"; };
+		61A5035727182CB900783240 /* SavedExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		61A50359271C84C300783240 /* SavedExerciseRepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedExerciseRepsViewController.swift; sourceTree = "<group>"; };
 		61B85FAB2704057900D1456B /* Pocket Trainer UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Trainer UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B85FAE2704057900D1456B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61B85FB02704057900D1456B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,7 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				61A5034C27144A5F00783240 /* CalendarViewController.swift */,
+				61A5035727182CB900783240 /* SavedExerciseCollectionViewCell.swift */,
 				61A50355271463DA00783240 /* ChooseExerciseViewController.swift */,
+				61A50359271C84C300783240 /* SavedExerciseRepsViewController.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -321,6 +327,7 @@
 				61A5034D27144A5F00783240 /* CalendarViewController.swift in Sources */,
 				61A503542714542500783240 /* Storage.swift in Sources */,
 				61B85FB92704057900D1456B /* Pocket_Trainer_UIKit.xcdatamodeld in Sources */,
+				61A5035A271C84C300783240 /* SavedExerciseRepsViewController.swift in Sources */,
 				6118364127053C3900BA16F8 /* ExerciseCollectionViewCell.swift in Sources */,
 				610AA2FB270F6E4A00C72952 /* WorkoutDaysViewController.swift in Sources */,
 				61A503522714540300783240 /* DataBase.swift in Sources */,
@@ -336,6 +343,7 @@
 				61B85FCE2704080400D1456B /* Exercise.swift in Sources */,
 				61B85FD12704080400D1456B /* MuscleGroup.swift in Sources */,
 				61C2CF6C270D2E7500C90897 /* WorkoutCollectionViewCell.swift in Sources */,
+				61A5035827182CB900783240 /* SavedExerciseCollectionViewCell.swift in Sources */,
 				6118363A2704192500BA16F8 /* MuscleCollectionViewCell.swift in Sources */,
 				61B85FB12704057900D1456B /* SceneDelegate.swift in Sources */,
 				61A50356271463DA00783240 /* ChooseExerciseViewController.swift in Sources */,

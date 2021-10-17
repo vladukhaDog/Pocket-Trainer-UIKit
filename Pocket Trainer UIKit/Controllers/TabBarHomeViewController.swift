@@ -54,6 +54,5 @@ class TabBarHomeViewController: UITabBarController, UITabBarControllerDelegate {
 	
 	// UITabBarControllerDelegate method
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-		//print("Selected \(viewController.title!)")
 	}
 }
