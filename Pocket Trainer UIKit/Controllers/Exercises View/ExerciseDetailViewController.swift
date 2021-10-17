@@ -99,7 +99,7 @@ class ExerciseDetailViewController: UIViewController {
 	//MARK: - functions
 	
 	private func fetchMuscleNames(){
-		getMuscleGroups(complete: { muscles in
+		Requester.shared.getMuscleGroups(complete: { muscles in
 			self.musclesToShow = muscles.filter({ muscle in
 				self.exercise.MuscleGroups.contains(where: {$0.MuscleGroupID == muscle.MuscleGroupID})
 			})

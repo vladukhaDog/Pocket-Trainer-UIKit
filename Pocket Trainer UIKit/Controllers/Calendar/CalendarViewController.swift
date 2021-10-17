@@ -98,7 +98,7 @@ class CalendarViewController: UIViewController, ExerciseAdderDelegate {
 	
 	
 	private func startFetch(){
-		getExercises(complete: {(cum) in
+		Requester.shared.getExercises(complete: {(cum) in
 			self.exercises = cum
 			self.addButton.isEnabled = true
 			self.collectionView.reloadData()

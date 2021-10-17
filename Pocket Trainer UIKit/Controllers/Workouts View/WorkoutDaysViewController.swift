@@ -87,7 +87,7 @@ class WorkoutDaysViewController: UIViewController {
 	
 	//MARK: - Get API Data
 	private func startFetch(){
-		getWorkoutDays(complete: {
+		Requester.shared.getWorkoutDays(complete: {
 			self.workoutDays = $0.filter({workoutDay in
 				self.workout.WorkoutDays.contains(where: {$0.WorkoutDayID == workoutDay.WorkoutDayID})
 			})
@@ -97,7 +97,7 @@ class WorkoutDaysViewController: UIViewController {
 			
 			
 			
-			getExercises(complete: {
+			Requester.shared.getExercises(complete: {
 				self.exercises = $0
 				self.segmentControl.selectedSegmentIndex = 0
 				self.currentWorkoutDay = self.workoutDays[0]
