@@ -50,13 +50,14 @@ class MuscleListViewController: UIViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
 		view.addSubview(collectionView)
+		collectionView.delaysContentTouches = false
 	}
 	
 	private func setDelegates(){
 		
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		collectionView.delaysContentTouches = false
+		
 		
 	}
 }

@@ -10,7 +10,16 @@ import UIKit
 class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "SavecExerciseCell"
 	
-	var exercise: Exercise?
+	var delegate: ExerciseAdderDelegate!
+	
+	var exerciseData: SavedExercise!
+	{
+		didSet{
+			exerciseRepsLabel.text = "Подходов: \(exerciseData.Weights.count)"
+		}
+	}
+	
+	var exercise: Exercise!
 	{
 		didSet{
 			guard let exercise = exercise else {
@@ -18,7 +27,7 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 			}
 
 			//set name of an exercise
-			exerciseName.text = exercise.Name
+			exerciseNameLabel.text = exercise.Name
 			
 			//set image of exercise
 			let url = URL(string: exercise.ImagePath ?? "")!
@@ -27,19 +36,21 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 		}
 	}
 	
-	
-	
-
-	
-	
 	//MARK: - UI components
 	
 	
-	private var exerciseName: UILabel = {
+	private var exerciseNameLabel: UILabel = {
 		var label = UILabel()
 		label.text = "Загрузка..."
 		label.lineBreakMode = .byWordWrapping
 		label.numberOfLines = 0
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	private var exerciseRepsLabel: UILabel = {
+		var label = UILabel()
+		label.text = "Загрузка..."
+		label.textColor = UIColor.gray
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -51,6 +62,14 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 		image.clipsToBounds = true
 		image.translatesAutoresizingMaskIntoConstraints = false
 		return image
+	}()
+	private var removeButton: UIButton = {
+		let button = UIButton()
+		button.setImage(UIImage(systemName: "trash")?.withTintColor(.systemRed), for: .normal)//.image = UIImage(systemName: "trash")
+		button.tintColor = .red
+		button.addTarget(self, action: #selector(removeButtonPressed(_:)), for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
 	}()
 	
 	
@@ -86,6 +105,10 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	}
 	
 	
+	@objc private func removeButtonPressed(_ sender: UIButton) {
+		delegate.removeExercise(exerciseData)
+	}
+	
 	
 	
 	
@@ -115,16 +138,13 @@ extension SavedExerciseCollectionViewCell{
 		contentView.layer.borderWidth = 4.0
 		
 		
-		addSubview(exerciseName)
+		addSubview(exerciseNameLabel)
 		addSubview(exerciseImageView)
-		//addSubview(numbersStackView)
-		//numbersStackView.addArrangedSubview(weightTextField)
-		//numbersStackView.addArrangedSubview(repsTextField)
+		addSubview(exerciseRepsLabel)
+		addSubview(removeButton)
 	}
 	
 	private func setDelegates(){
-		//weightTextField.delegate = self
-		//repsTextField.delegate = self
 	}
 	
 	private func setConstraints(){
@@ -136,21 +156,22 @@ extension SavedExerciseCollectionViewCell{
 		])
 		
 		NSLayoutConstraint.activate([
-			exerciseName.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
-			exerciseName.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-			exerciseName.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-			exerciseName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+			exerciseNameLabel.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
+			exerciseNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+			exerciseNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -10)
 			
 		])
 		
-		//NSLayoutConstraint.activate([
-		//	numbersStackView.leadingAnchor.constraint(equalTo: exerciseName.trailingAnchor, constant: 10),
-		//	numbersStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-		//	numbersStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
-		//
-		//])
-		
-		
+		NSLayoutConstraint.activate([
+			exerciseRepsLabel.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 10),
+			exerciseRepsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+			exerciseRepsLabel.topAnchor.constraint(equalTo: exerciseNameLabel.bottomAnchor, constant: 10),
+			
+		])
+		NSLayoutConstraint.activate([
+			removeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+			removeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 15)
+		])
 		
 		
 	}

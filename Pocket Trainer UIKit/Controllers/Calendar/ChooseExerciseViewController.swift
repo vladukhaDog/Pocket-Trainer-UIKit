@@ -17,8 +17,8 @@ class ChooseExerciseViewController: UIViewController {
 		let layout = UICollectionViewFlowLayout()
 		layout.minimumLineSpacing = 15.0
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		//collectionView.backgroundColor = UIColor(named: "Background")
 		collectionView.bounces = true
+		collectionView.delaysContentTouches = false
 		collectionView.register(ExerciseCollectionViewCell.self, forCellWithReuseIdentifier: ExerciseCollectionViewCell.identifier)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		return collectionView
@@ -39,8 +39,6 @@ class ChooseExerciseViewController: UIViewController {
 		setupViews()
 		setConstraints()
 		setDelegates()
-		
-		//startFetch()
     }
     
 
@@ -61,7 +59,6 @@ extension ChooseExerciseViewController{
 		
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		collectionView.delaysContentTouches = false
 		searchBar.delegate = self
 		
 	}
@@ -112,8 +109,7 @@ extension ChooseExerciseViewController: UICollectionViewDelegate, UICollectionVi
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		//print("pressed")
-		let saved = SavedExercise(Exercise: ExerciseSavedData(ExerciseID: exercisesFiltered[indexPath.row].ExerciseId, RepsNumber: []), date: Date(), Weights: [])
+		let saved = SavedExercise(ExerciseID: exercisesFiltered[indexPath.row].ExerciseId, date: Date(), Weights: [], RepsNumber: [])
 		delegate?.addExercise(saved)
 	}
 	
