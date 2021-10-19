@@ -110,16 +110,7 @@ class SavedExerciseRepsViewController: UIViewController {
 }
 
 
-//MARK: - Textfield delegates
-extension SavedExerciseRepsViewController: UITextFieldDelegate{
-	
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		repsTextField.resignFirstResponder()
-		weightTextField.resignFirstResponder()
-		return true
-	}
-}
+
 
 
 //MARK: - constraints and view setups
@@ -174,8 +165,56 @@ extension SavedExerciseRepsViewController{
 	}
 }
 
+//MARK: - UITextField delegates
+extension SavedExerciseRepsViewController: UITextFieldDelegate{
+	
+	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		
+		let maximumCharacters = 4
+		// Handle backspace/delete
+		guard !string.isEmpty else {
+			
+			// Backspace detected, allow text change, no need to process the text any further
+			return true
+		}
+		
+		// Length Processing
+		// Need to convert the NSRange to a Swift-appropriate type
+		if let text = textField.text, let range = Range(range, in: text) {
+			
+			let proposedText = text.replacingCharacters(in: range, with: string)
+			
+			// Check proposed text length does not exceed max character count
+			guard proposedText.count <= maximumCharacters else {
+				
+				// Character count exceeded, disallow text change
+				return false
+			}
+		}
+		
+		// Check for invalid input characters
+		if CharacterSet(charactersIn: "-0123456789").isSuperset(of: CharacterSet(charactersIn: string)) {
+			
+			return true
+		}
+		
+		
+		
+		
+		// Allow text change
+		return false
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		repsTextField.resignFirstResponder()
+		weightTextField.resignFirstResponder()
+		return true
+	}
+}
 
-//MARK: - delegates
+
+//MARK: - UICollectionView delegates
 extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
 	
@@ -210,6 +249,8 @@ extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectio
 		}
 	}
 }
+
+
 
 //MARK: - remove Button in collectionView
 class removeCell: UICollectionViewCell{
