@@ -99,8 +99,8 @@ class SavedExerciseRepsViewController: UIViewController {
 		guard let reps = Int(repsString) else {return}
 		guard let weight = Int(weightString) else {return}
 		
-		exerciseData.Weights.append(weight)
-		exerciseData.RepsNumber.append(reps)
+		exerciseData.weights.append(weight)
+		exerciseData.repsNumber.append(reps)
 		collectionView.reloadData()
 		delegate?.editExercise(exerciseData)
 	}
@@ -220,18 +220,18 @@ extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectio
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		
-		return (exerciseData.SetNumber > 0 ? exerciseData.SetNumber + 1 : 0)
+		return (exerciseData.weights.count > 0 ? Int(exerciseData.weights.count + 1) : 0)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if (indexPath.row == exerciseData.SetNumber){
+		if (indexPath.row == exerciseData.weights.count){
 			if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: removeCell.identifier, for: indexPath) as? removeCell{
 				return cell
 			}
 		}else {
 			if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: repCell.identifier, for: indexPath) as? repCell{
-				let reps = exerciseData.RepsNumber[indexPath.row]
-				let weight = exerciseData.Weights[indexPath.row]
+				let reps = exerciseData.repsNumber[indexPath.row]
+				let weight = exerciseData.weights[indexPath.row]
 				cell.configure(reps: reps, weight: weight)
 				return cell
 			}
@@ -241,9 +241,9 @@ extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectio
 	
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if (indexPath.row == exerciseData.SetNumber){
-			exerciseData.Weights.removeLast()
-			exerciseData.RepsNumber.removeLast()
+		if (indexPath.row == exerciseData.weights.count){
+			exerciseData.weights.removeLast()
+			exerciseData.repsNumber.removeLast()
 			collectionView.reloadData()
 			delegate?.editExercise(exerciseData)
 		}

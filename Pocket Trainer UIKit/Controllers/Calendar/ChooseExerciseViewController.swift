@@ -109,8 +109,8 @@ extension ChooseExerciseViewController: UICollectionViewDelegate, UICollectionVi
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let saved = SavedExercise(ExerciseID: exercisesFiltered[indexPath.row].ExerciseId, date: Date(), Weights: [], RepsNumber: [])
-		delegate?.addExercise(saved)
+		//let saved = SavedExercise(ExerciseID: exercisesFiltered[indexPath.row].ExerciseId, date: date, Weights: [], RepsNumber: [])
+		delegate?.addExercise(exerciseID: exercisesFiltered[indexPath.row].ExerciseId, weights: [], repsNumber: [])
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

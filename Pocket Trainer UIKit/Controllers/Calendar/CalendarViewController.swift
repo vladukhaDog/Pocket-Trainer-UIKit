@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ExerciseAdderDelegate{
-	func addExercise(_ exercise: SavedExercise)
+	func addExercise(exerciseID: Int, weights: [Int], repsNumber: [Int])
 	func editExercise(_ exercise: SavedExercise)
 	func removeExercise(_ exercise: SavedExercise)
 }
@@ -120,7 +120,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedExerciseCollectionViewCell.identifier, for: indexPath) as? SavedExerciseCollectionViewCell{
 			cell.exerciseData = savedExercises[indexPath.row]
-			cell.exercise = exercises.first(where: {$0.ExerciseId == savedExercises[indexPath.row].ExerciseID})
+			cell.exercise = exercises.first(where: {$0.ExerciseId == savedExercises[indexPath.row].exerciseID})
 			cell.delegate = self
 		return cell
 		}
@@ -211,11 +211,10 @@ extension CalendarViewController{
 //MARK: - database delegate extension
 extension CalendarViewController{
 	
-	func addExercise(_ exercise: SavedExercise) {
+	func addExercise(exerciseID: Int, weights: [Int], repsNumber: [Int]) {
 		//ADD
-		exercise.date = datePicker.date
-		savedExercises.append(exercise)
-		db.addExerciseToDB(exercise)
+		db.addExerciseToDB(exerciseID: exerciseID, date: datePicker.date, weights: weights, repsNumber: repsNumber)
+		savedExercises = db.getExercisesByDate(datePicker.date)
 		collectionView.reloadData()
 		self.dismiss(animated: true)
 	}

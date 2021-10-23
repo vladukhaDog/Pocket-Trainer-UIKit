@@ -15,7 +15,7 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	var exerciseData: SavedExercise!
 	{
 		didSet{
-			exerciseRepsLabel.text = "Подходов: \(exerciseData.Weights.count)"
+			exerciseRepsLabel.text = "Подходов: \(exerciseData.weights.count)"
 		}
 	}
 	

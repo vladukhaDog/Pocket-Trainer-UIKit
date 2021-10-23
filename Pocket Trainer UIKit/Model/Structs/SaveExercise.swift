@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SavedExercise: Codable {
+class SavedExerciseOld: Codable {
 	var id = UUID()
 	//var Exercise: ExerciseSavedData
 	var date: Date
