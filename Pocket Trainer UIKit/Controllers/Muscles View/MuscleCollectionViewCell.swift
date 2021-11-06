@@ -46,8 +46,9 @@ class MuscleCollectionViewCell: UICollectionViewCell {
 	
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
-		contentView.layer.borderColor = UIColor.gray.cgColor
-		contentView.layer.borderWidth = 4.0
+		contentView.backgroundColor = UIColor(named: "Block")
+		//contentView.layer.borderColor = UIColor.gray.cgColor
+		//contentView.layer.borderWidth = 4.0
 		
 		addSubview(muscleName)
 		addSubview(muscleImageView)

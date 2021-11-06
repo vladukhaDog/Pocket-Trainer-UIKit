@@ -110,8 +110,9 @@ class ExerciseDetailViewController: UIViewController {
 	private func makeMuscleList(){
 		for musc in self.musclesToShow {
 			let label = UILabelPadding()
-			label.layer.borderColor = UIColor.lightGray.cgColor
-			label.layer.borderWidth = 3.0
+			//label.layer.borderColor = UIColor.lightGray.cgColor
+			//label.layer.borderWidth = 3.0
+			label.layer.backgroundColor = UIColor(named: "Block")?.cgColor
 			label.layer.cornerRadius = 14.0
 			//label.layer.bounds.size = CGSize(width: label.bounds.size.width + 5, height: label.bounds.size.height + 5)
 			label.text = musc.Name

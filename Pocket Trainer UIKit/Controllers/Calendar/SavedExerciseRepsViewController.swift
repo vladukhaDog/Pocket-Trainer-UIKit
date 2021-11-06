@@ -294,9 +294,9 @@ class removeCell: UICollectionViewCell{
 	private func setupViews(){
 		addSubview(removeButton)
 		
-		self.layer.cornerRadius = 16.0
-		self.layer.borderWidth = 2.0
-		self.layer.borderColor = UIColor.systemRed.cgColor
+		//self.layer.cornerRadius = 16.0
+		//self.layer.borderWidth = 2.0
+		//self.layer.borderColor = UIColor.systemRed.cgColor
 	}
 	
 	//MARK: - constraints
