@@ -8,5 +8,6 @@ target 'Pocket Trainer UIKit' do
   # Pods for Pocket Trainer UIKit
 	pod "Alamofire"
 	pod "SDWebImage"
+	pod 'Kingfisher'
 
 end

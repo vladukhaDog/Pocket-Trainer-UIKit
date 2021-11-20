@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Kingfisher
 
 class ExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "ExerciseCell"
@@ -21,7 +22,12 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 	
 			//set image of exercise
 			let url = URL(string: exerciseData?.ImagePath ?? "")!
-			fillImageFromUrl(url: url, imageView: exerciseImageView)
+			exerciseImageView.kf.setImage(
+				with: url,
+				options: [
+					.transition(.fade(0.4)),
+					
+				])
 	
 		}
 	}
@@ -57,26 +63,10 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 	}
 	
 	//MARK: - functions
-	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-	}
-	
-	//downloads data from url and sets it as image
-	//SDWebImage is not used since it animates gifs with no way of stopping them in regular UIImageView
-	func fillImageFromUrl(url: URL, imageView: UIImageView){
-		getData(from: url) { data, response, error in
-				guard let data = data, error == nil else { return }
-			DispatchQueue.main.async() {
-					imageView.image = UIImage(data: data)
-				}
-			}
-	}
 	
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
 		contentView.backgroundColor = UIColor(named: "Block")
-		//contentView.layer.borderColor = UIColor.gray.cgColor
-		//contentView.layer.borderWidth = 4.0
 	
 		addSubview(exerciseName)
 		addSubview(exerciseImageView)

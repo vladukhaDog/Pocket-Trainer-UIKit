@@ -6,32 +6,33 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "SavecExerciseCell"
 	
 	var delegate: ExerciseAdderDelegate!
 	
-	var exerciseData: SavedExercise!
-	{
+	var exerciseData: SavedExercise!{
 		didSet{
 			exerciseRepsLabel.text = "Подходов: \(exerciseData.weights.count)"
 		}
 	}
 	
-	var exercise: Exercise!
-	{
+	var exercise: Exercise!{
 		didSet{
-			guard let exercise = exercise else {
-				return
-			}
+			guard let exercise = exercise else {return}
 
 			//set name of an exercise
 			exerciseNameLabel.text = exercise.Name
-			
 			//set image of exercise
 			let url = URL(string: exercise.ImagePath ?? "")!
-			fillImageFromUrl(url: url, imageView: exerciseImageView)
+			exerciseImageView.kf.setImage(
+				with: url,
+				options: [
+					.transition(.fade(0.4)),
+					
+				])
 			
 		}
 	}
@@ -41,7 +42,7 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	
 	private var exerciseNameLabel: UILabel = {
 		var label = UILabel()
-		label.text = "Загрузка..."
+		label.text = ""
 		label.lineBreakMode = .byWordWrapping
 		label.numberOfLines = 0
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +50,7 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	}()
 	private var exerciseRepsLabel: UILabel = {
 		var label = UILabel()
-		label.text = "Загрузка..."
+		label.text = ""
 		label.textColor = UIColor.gray
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
@@ -89,28 +90,10 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 	}
 	
 	//MARK: - functions
-	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-	}
-	
-	//downloads data from url and sets it as image
-	//SDWebImage is not used since it animates gifs with no way of stopping them in regular UIImageView
-	func fillImageFromUrl(url: URL, imageView: UIImageView){
-		getData(from: url) { data, response, error in
-			guard let data = data, error == nil else { return }
-			DispatchQueue.main.async() {
-				imageView.image = UIImage(data: data)
-			}
-		}
-	}
-	
 	
 	@objc private func removeButtonPressed(_ sender: UIButton) {
 		delegate.removeExercise(exerciseData)
 	}
-	
-	
-	
 	
 	override var isHighlighted: Bool {
 		didSet {
@@ -131,14 +114,10 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 
 //MARK: - constraints and view setups
 extension SavedExerciseCollectionViewCell{
-	
+
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
 		contentView.backgroundColor = UIColor(named: "Block")
-		//contentView.layer.borderColor = UIColor.gray.cgColor
-		//contentView.layer.borderWidth = 4.0
-		
-		
 		addSubview(exerciseNameLabel)
 		addSubview(exerciseImageView)
 		addSubview(exerciseRepsLabel)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class WorkoutExerciseCollectionViewCell: UICollectionViewCell {
 	static let identifier = "WorkoutExerciseCell"
@@ -26,8 +27,13 @@ class WorkoutExerciseCollectionViewCell: UICollectionViewCell {
 			exerciseNameLabel.text = exercise?.Name
 	
 			//set image of exercise
-			let url = URL(string: exercise?.ImagePath ?? "")!
-			fillImageFromUrl(url: url, imageView: exerciseImageView)
+			let url = URL(string: exercise?.ImagePath ?? "")
+			exerciseImageView.kf.setImage(
+				with: url,
+				options: [
+					.transition(.fade(0.4)),
+					
+				])
 	
 		}
 	}
@@ -94,20 +100,6 @@ class WorkoutExerciseCollectionViewCell: UICollectionViewCell {
 	
 	
 	//MARK: - functions
-	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-	}
-	
-	//downloads data from url and sets it as image
-	//SDWebImage is not used since it animates gifs with no way of stopping them in regular UIImageView
-	func fillImageFromUrl(url: URL, imageView: UIImageView){
-		getData(from: url) { data, response, error in
-				guard let data = data, error == nil else { return }
-			DispatchQueue.main.async() {
-					imageView.image = UIImage(data: data)
-				}
-			}
-	}
 	
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0

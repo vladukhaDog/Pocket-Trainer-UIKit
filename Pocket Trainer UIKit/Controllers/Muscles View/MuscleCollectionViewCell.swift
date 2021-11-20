@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Kingfisher
 
 class MuscleCollectionViewCell: UICollectionViewCell {
     
@@ -16,7 +17,13 @@ class MuscleCollectionViewCell: UICollectionViewCell {
 	var muscleData: MuscleGroup? {
 		didSet{
 			muscleName.text = muscleData?.Name
-			muscleImageView.sd_setImage(with: URL(string: muscleData?.ImagePath ?? ""))
+			
+			let url = URL(string: muscleData?.ImagePath ?? "")
+			muscleImageView.kf.setImage(
+				with: url,
+				options: [
+					.transition(.fade(0.4))
+				])
 		}
 	}
 	

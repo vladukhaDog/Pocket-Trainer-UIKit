@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class WorkoutCollectionViewCell: UICollectionViewCell {
 	//MARK: - Vars and Data
@@ -14,7 +15,13 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 	var workoutData: Workout? {
 		didSet{
 			workoutName.text = workoutData?.Name
-			workoutImageView.sd_setImage(with: URL(string: workoutData?.ImagePath ?? ""))
+			let url = URL(string: workoutData?.ImagePath ?? "")
+			workoutImageView.kf.setImage(
+				with: url,
+				options: [
+					.transition(.fade(0.4)),
+					
+				])
 		}
 	}
 	

@@ -30,7 +30,6 @@ class ExerciseDetailViewController: UIViewController {
 	private var descriptionTitleLabel: UILabel {
 		let label = UILabel()
 		label.text = "Описание"
-		
 		label.font = label.font.withSize(25)
 		label.textColor = UIColor.lightGray
 		label.translatesAutoresizingMaskIntoConstraints = false
