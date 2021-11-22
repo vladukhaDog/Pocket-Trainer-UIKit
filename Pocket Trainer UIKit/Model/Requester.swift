@@ -8,8 +8,7 @@
 import Alamofire
 
 class Requester{
-	private let Url = "https://skylice.ru/pocket-trainer-api/"
-	
+	private let Url = "http://dogteam.ru/pockettrainer/"
 	static let shared = Requester()
 	
 	
