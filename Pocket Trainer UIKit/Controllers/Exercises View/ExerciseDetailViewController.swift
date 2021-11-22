@@ -98,7 +98,7 @@ class ExerciseDetailViewController: UIViewController {
 	//MARK: - functions
 	
 	private func fetchMuscleNames(){
-		Requester.shared.getMuscleGroups(complete: { muscles in
+		NetworkManager.shared.getMuscleGroups(complete: { muscles in
 			self.musclesToShow = muscles.filter({ muscle in
 				self.exercise.MuscleGroups.contains(where: {$0.MuscleGroupID == muscle.MuscleGroupID})
 			})

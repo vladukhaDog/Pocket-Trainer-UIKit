@@ -7,9 +7,9 @@
 
 import Alamofire
 
-class Requester{
+class NetworkManager{
 	private let Url = "http://dogteam.ru/pockettrainer/"
-	static let shared = Requester()
+	static let shared = NetworkManager()
 	
 	
 	init() {

@@ -65,7 +65,7 @@ extension ChooseExerciseViewController{
 	
 	//fetching Exercises from API
 	private func startFetch(){
-		Requester.shared.getExercises(complete: {(cum) in
+		NetworkManager.shared.getExercises(complete: {(cum) in
 			self.exercises = cum
 			self.exercisesFiltered = cum
 			self.collectionView.reloadData()

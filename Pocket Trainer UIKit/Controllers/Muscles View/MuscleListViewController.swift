@@ -40,7 +40,7 @@ class MuscleListViewController: UIViewController {
 	
 	//fetching muscle list from API
 	func startFetch(){
-		Requester.shared.getMuscleGroups(complete: {(cum) in
+		NetworkManager.shared.getMuscleGroups(complete: {(cum) in
 			self.muscles = cum
 				self.collectionView.reloadData()
 		})

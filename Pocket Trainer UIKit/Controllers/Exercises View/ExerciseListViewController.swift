@@ -44,7 +44,7 @@ class ExerciseListViewController: UIViewController {
 	
 	//fetching Exercises from API
 	private func startFetch(){
-		Requester.shared.getExercises(complete: {(cum) in
+		NetworkManager.shared.getExercises(complete: {(cum) in
 			self.exercisesArray = cum.filter({ exercise in
 				exercise.MuscleGroups.contains { muscle in
 					muscle.MuscleGroupID == self.muscleGroup.MuscleGroupID

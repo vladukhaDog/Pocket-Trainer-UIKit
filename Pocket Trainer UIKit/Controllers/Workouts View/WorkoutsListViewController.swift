@@ -49,7 +49,7 @@ class WorkoutsListViewController: UIViewController {
 	
 	//fetching muscle list from API
 	private func startFetch(){
-		Requester.shared.getWorkouts(complete: { (cum) in//(complete: {(cum) in
+		NetworkManager.shared.getWorkouts(complete: { (cum) in//(complete: {(cum) in
 			self.workouts = cum
 			self.collectionView.reloadData()
 		})

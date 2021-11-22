@@ -16,7 +16,7 @@ protocol ExerciseAdderDelegate{
 class CalendarViewController: UIViewController, ExerciseAdderDelegate {
 
 	private var exercises = [Exercise]()
-	private let db = DataBase()
+	private let db = dbManager()
 	private var savedExercises = [SavedExercise]()
 	
 	
@@ -99,7 +99,7 @@ class CalendarViewController: UIViewController, ExerciseAdderDelegate {
 	
 	
 	private func startFetch(){
-		Requester.shared.getExercises(complete: {(cum) in
+		NetworkManager.shared.getExercises(complete: {(cum) in
 			self.exercises = cum
 			self.addButton.isEnabled = true
 			self.collectionView.reloadData()
