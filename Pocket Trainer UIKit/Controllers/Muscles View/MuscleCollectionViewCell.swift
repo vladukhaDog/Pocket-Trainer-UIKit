@@ -54,22 +54,22 @@ class MuscleCollectionViewCell: UICollectionViewCell {
 	private func setupViews(){
 		contentView.layer.cornerRadius = 20.0
 		contentView.backgroundColor = UIColor(named: "Block")
-		//contentView.layer.borderColor = UIColor.gray.cgColor
-		//contentView.layer.borderWidth = 4.0
 		
 		addSubview(muscleName)
 		addSubview(muscleImageView)
 	}
 	
-	override var isHighlighted: Bool {
-			didSet {
-				if self.isHighlighted {
-					alpha = 0.5
-				} else {
-					alpha = 1.0
-				}
-			}
-		}
+    override var isSelected: Bool{
+        didSet{
+            
+            if self.isSelected {
+                
+                contentView.backgroundColor = UIColor.gray
+            } else {
+                contentView.backgroundColor = UIColor(named: "Block")
+            }
+        }
+    }
 	
 	
 	

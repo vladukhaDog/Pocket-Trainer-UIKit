@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExerciseListViewController: UIViewController {
+class ExerciseCollectionViewController: UIViewController {
 
 	//MARK: - Variables and stuff
 	
@@ -51,8 +51,6 @@ class ExerciseListViewController: UIViewController {
 				}
 			})
 				self.collectionView.reloadData()
-			
-			
 		})
 	}
 	
@@ -78,7 +76,7 @@ class ExerciseListViewController: UIViewController {
 }
 
 //MARK: - Constraints
-extension ExerciseListViewController{
+extension ExerciseCollectionViewController{
 	private func setConstraints(){
 		
 		NSLayoutConstraint.activate([
@@ -92,7 +90,7 @@ extension ExerciseListViewController{
 }
 
 //MARK: - Delegate & DataSource
-extension ExerciseListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ExerciseCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
