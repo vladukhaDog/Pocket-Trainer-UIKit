@@ -39,6 +39,11 @@ class MuscleListViewController: UIViewController {
     private var exercisesToShow = [Exercise]()
     private var exercisesList = [Exercise]() {
         didSet{
+            let i = UserDefaults.standard.integer(forKey: "muscle")
+            let index = IndexPath(row: i, section: 0)
+            muscleGroup = muscles[i]
+            musclesCollectionView.selectItem(at: index, animated: true, scrollPosition: .centeredHorizontally)
+            //muscleGroup = self.muscles[index]
             exercisesToShow = exercisesList.filter({ exercise in
                 exercise.MuscleGroups.contains { muscle in
                     muscle.MuscleGroupID == muscleGroup?.MuscleGroupID
@@ -70,9 +75,7 @@ class MuscleListViewController: UIViewController {
 	func startFetch(){
 		NetworkManager.shared.getMuscleGroups(complete: {(muscs) in
 			self.muscles = muscs
-				self.musclesCollectionView.reloadData()
-            let index = IndexPath(row: 0, section: 0)
-            self.musclesCollectionView.selectItem(at: index, animated: true, scrollPosition: .centeredHorizontally)
+            self.musclesCollectionView.reloadData()
 		})
         
         NetworkManager.shared.getExercises(complete: {(exerc) in
@@ -160,8 +163,7 @@ extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDa
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        
-        
+     
         switch collectionView {
         case musclesCollectionView:
             musclesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -172,6 +174,8 @@ extension MuscleListViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
             })
             exercisesCollectionView.reloadData()
+            
+            UserDefaults.standard.set(indexPath.row, forKey: "muscle")
         case exercisesCollectionView:
             let vc = ExerciseDetailViewController()
             vc.exercise = exercisesToShow[indexPath.row]
