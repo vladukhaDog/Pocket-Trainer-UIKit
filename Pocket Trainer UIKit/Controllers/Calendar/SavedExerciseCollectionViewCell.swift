@@ -27,12 +27,14 @@ class SavedExerciseCollectionViewCell: UICollectionViewCell {
 			exerciseNameLabel.text = exercise.Name
 			//set image of exercise
 			let url = URL(string: exercise.ImagePath ?? "")!
-			exerciseImageView.kf.setImage(
-				with: url,
-				options: [
-					.transition(.fade(0.4)),
-					
-				])
+            let processor = DownsamplingImageProcessor(size: exerciseImageView.bounds.size)
+            exerciseImageView.kf.setImage(
+                with: url,
+                options: [
+                    .processor(processor),
+                    .transition(.fade(0.4)),
+                    .onlyLoadFirstFrame
+                ])
 			
 		}
 	}

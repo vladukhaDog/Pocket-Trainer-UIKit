@@ -18,17 +18,15 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
 	{
 		didSet{
 			//set name of an exercise
-			exerciseName.text = exerciseData?.Name
+			exerciseName.text = exerciseData.Name
 	
 			//set image of exercise
-			let url = URL(string: exerciseData?.ImagePath ?? "")!
+            let url = URL(string: exerciseData.ImagePath ?? "")!
             let processor = DownsamplingImageProcessor(size: exerciseImageView.bounds.size)
 			exerciseImageView.kf.setImage(
 				with: url,
 				options: [
                     .processor(processor),
-					.transition(.fade(0.4)),
-                    .cacheOriginalImage,
                     .onlyLoadFirstFrame
 				])
 	

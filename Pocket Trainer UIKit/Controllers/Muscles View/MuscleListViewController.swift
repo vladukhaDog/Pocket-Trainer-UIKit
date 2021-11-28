@@ -41,15 +41,23 @@ class MuscleListViewController: UIViewController {
         didSet{
             let i = UserDefaults.standard.integer(forKey: "muscle")
             let index = IndexPath(row: i, section: 0)
-            muscleGroup = muscles[i]
+            
             musclesCollectionView.selectItem(at: index, animated: true, scrollPosition: .centeredHorizontally)
-            //muscleGroup = self.muscles[index]
+            musclesCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            muscleGroup = muscles[index.row]
             exercisesToShow = exercisesList.filter({ exercise in
                 exercise.MuscleGroups.contains { muscle in
                     muscle.MuscleGroupID == muscleGroup?.MuscleGroupID
                 }
             })
             exercisesCollectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.exercisesCollectionView.reloadData()
+                //тупейший фикс того, что при первой загрузке в ячейках не грузятся картинки, пока не подвигать их или не релоуднуть collectionview
+                //пздец
+            }
+            
+            
         }
     }
     private var muscleGroup: MuscleGroup?

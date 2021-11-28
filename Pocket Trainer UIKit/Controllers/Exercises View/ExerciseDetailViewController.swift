@@ -7,6 +7,8 @@
 
 import UIKit
 import SDWebImage
+import Kingfisher
+
 
 class ExerciseDetailViewController: UIViewController {
 	
@@ -24,7 +26,7 @@ class ExerciseDetailViewController: UIViewController {
 		image.clipsToBounds = true
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .clear
+		image.backgroundColor = .gray
 		return image
 	}
 	private var descriptionTitleLabel: UILabel {
@@ -92,7 +94,6 @@ class ExerciseDetailViewController: UIViewController {
 		
 		
 	}
-	
 	
 	
 	//MARK: - functions
@@ -178,27 +179,14 @@ extension ExerciseDetailViewController{
 		
 		
 		
-		//stackview in contentView (maybe i could skip contentView and display stackView initially in scroll view but fuck that)
+
 		NSLayoutConstraint.activate([
 			stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-			stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+			stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8),
 			stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-			stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+			stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8)
 		])
-		
-		
-			
-		
-		//padding from scroll
-		NSLayoutConstraint.activate([
-			stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-			scrollView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 20)
-			//stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-		])
-		
-		
-		
-		
+	
 	}
 }
 

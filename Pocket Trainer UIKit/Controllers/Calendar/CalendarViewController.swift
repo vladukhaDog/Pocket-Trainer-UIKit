@@ -130,8 +130,11 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let saved = savedExercises[indexPath.row]
 		let vc = SavedExerciseRepsViewController()
+        let exerciseData: Exercise? = exercises.first(where: {$0.ExerciseId == savedExercises[indexPath.row].exerciseID})
 		vc.delegate = self
-		vc.exerciseData = saved
+		vc.saveData = saved
+        
+        vc.exercise = exerciseData
 		if let sheet = vc.sheetPresentationController {
 			sheet.detents = [.medium()]
 			sheet.largestUndimmedDetentIdentifier = .medium

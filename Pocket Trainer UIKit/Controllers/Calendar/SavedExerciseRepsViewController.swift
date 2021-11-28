@@ -12,7 +12,8 @@ class SavedExerciseRepsViewController: UIViewController {
 	
 	var delegate:ExerciseAdderDelegate?
 	
-	var exerciseData: SavedExercise!
+	var saveData: SavedExercise!
+    var exercise: Exercise!
 	
 	//MARK: - UI elements
 	
@@ -63,6 +64,7 @@ class SavedExerciseRepsViewController: UIViewController {
 	
 	private var addButton: UIButton = {
 		let button = UIButton()
+        button.configuration = .borderedTinted()
 		button.setTitle("Добавить Подход", for: .normal)
 		button.setTitleColor(UIColor.systemBlue, for: .normal)
 		button.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.4), for: .highlighted)
@@ -70,6 +72,18 @@ class SavedExerciseRepsViewController: UIViewController {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
+    
+    private var infoButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "info.circle")
+        button.configuration = .borderedTinted()
+        button.setImage(image, for: .normal)
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.4), for: .highlighted)
+        button.addTarget(self, action: #selector(infoButtonPressed(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 	
 	
 	
@@ -85,13 +99,24 @@ class SavedExerciseRepsViewController: UIViewController {
     }
 	
 	
-	//MARK: - functions
+	//MARK: - Functions
 	
 	@objc private func addButtonPressed(_ sender: UIButton){
 		addSet()
 	}
 	
-    
+    @objc private func infoButtonPressed(_ sender: UIButton){
+        let vc = ExerciseDetailViewController()
+        vc.exercise = exercise
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersEdgeAttachedInCompactHeight = false
+            sheet.preferredCornerRadius = 16.0
+            sheet.prefersGrabberVisible = true
+        }
+        present(vc, animated: true, completion: nil)
+    }
 	
 	private func addSet(){
 		let repsString = repsTextField.text ?? ""
@@ -99,10 +124,10 @@ class SavedExerciseRepsViewController: UIViewController {
 		guard let reps = Int(repsString) else {return}
 		guard let weight = Int(weightString) else {return}
 		
-		exerciseData.weights.append(weight)
-		exerciseData.repsNumber.append(reps)
+		saveData.weights.append(weight)
+		saveData.repsNumber.append(reps)
 		collectionView.reloadData()
-		delegate?.editExercise(exerciseData)
+		delegate?.editExercise(saveData)
 	}
 
 
@@ -121,14 +146,15 @@ extension SavedExerciseRepsViewController{
 		
 		view.addSubview(topStackView)
 		view.addSubview(collectionView)
-		
-		
+        topStackView.addArrangedSubview(infoButton)
 		topStackView.addArrangedSubview(numbersStackView)
+        topStackView.addArrangedSubview(addButton)
+        
 		//view.addSubview(numbersStackView)
 		numbersStackView.addArrangedSubview(weightTextField)
 		numbersStackView.addArrangedSubview(repsTextField)
 		
-		topStackView.addArrangedSubview(addButton)
+		
 		
 		
 		
@@ -220,18 +246,18 @@ extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectio
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		
-		return (exerciseData.weights.count > 0 ? Int(exerciseData.weights.count + 1) : 0)
+		return (saveData.weights.count > 0 ? Int(saveData.weights.count + 1) : 0)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if (indexPath.row == exerciseData.weights.count){
+		if (indexPath.row == saveData.weights.count){
 			if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: removeCell.identifier, for: indexPath) as? removeCell{
 				return cell
 			}
 		}else {
 			if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: repCell.identifier, for: indexPath) as? repCell{
-				let reps = exerciseData.repsNumber[indexPath.row]
-				let weight = exerciseData.weights[indexPath.row]
+				let reps = saveData.repsNumber[indexPath.row]
+				let weight = saveData.weights[indexPath.row]
 				cell.configure(reps: reps, weight: weight)
 				return cell
 			}
@@ -241,11 +267,11 @@ extension SavedExerciseRepsViewController: UICollectionViewDelegate, UICollectio
 	
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if (indexPath.row == exerciseData.weights.count){
-			exerciseData.weights.removeLast()
-			exerciseData.repsNumber.removeLast()
+		if (indexPath.row == saveData.weights.count){
+			saveData.weights.removeLast()
+			saveData.repsNumber.removeLast()
 			collectionView.reloadData()
-			delegate?.editExercise(exerciseData)
+			delegate?.editExercise(saveData)
 		}
 	}
 }
